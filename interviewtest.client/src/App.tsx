@@ -213,7 +213,7 @@ function App() {
   }
 
   async function updateEmployee(emp: any) {
-    const newValue = prompt(`Yeni değer (mevcut: ${emp.value}):`, emp.value);
+    const newValue = prompt(`New Value(Current: ${emp.value}):`, emp.value);
     if (!newValue) return;
 
     await fetch('/api/employees', {

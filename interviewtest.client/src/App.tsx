@@ -9,12 +9,14 @@ function App() {
   const [sortField, setSortField] = useState<'name' | 'value' | null>(null);
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('asc');
 
-
+  // To check API connectivity and fetch initial employees
   useEffect(() => {
     checkConnectivity();
     fetchEmployees();
   }, []);
 
+  // Sorting Logic
+  // To create sorted copy of the employees based on sortField and sortOrder 
   const sortedEmployees = [...employees].sort((a, b) => {
     if (!sortField) return 0;
 
@@ -178,6 +180,9 @@ function App() {
     </div>
   );
 
+   // FUNCTIONS
+
+  // To check backend connectivity and update state.
   async function checkConnectivity() {
     const response = await fetch('/api/employees');
     const data = await response.json();
@@ -185,25 +190,30 @@ function App() {
     setEmployees(data);
   }
 
+  // To fetch employees list from backend and store in state.
   async function fetchEmployees() {
     const response = await fetch('/api/employees');
     const data = await response.json();
     setEmployees(data);
   }
 
+  // Add a new employee by POST request.
   async function addEmployee() {
-    // Do not add if the field is empty
+    // Do not add if the field is empty.
     if (!name || !value) return;
     await fetch('/api/employees', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json'},
       body: JSON.stringify({name, value: Number(value) }),
     });
+    // To reset form inputs.
     setName('');
     setValue('');
+    // To refresh employee list.
     fetchEmployees();
   }
 
+  // To delete an employee by name
   async function deleteEmployee(name: string) {
     await fetch(`/api/employees/${name}`, {
       method: 'DELETE'
@@ -212,6 +222,7 @@ function App() {
     fetchEmployees();
   }
 
+  // Prompt for a new value and update the employee's value.
   async function updateEmployee(emp: any) {
     const newValue = prompt(`New Value(Current: ${emp.value}):`, emp.value);
     if (!newValue) return;
@@ -224,12 +235,15 @@ function App() {
     fetchEmployees()
   }
 
+  // To  perform the incerement operation on values on the end-point.
   async function incrementValues() {
     await fetch('/api/employees/increment-values', {
       method: 'POST',
     });
     fetchEmployees();
   }
+
+  // To get sum of values for names starting with A, B, or C.
   async function getSumValues() {
     const response = await fetch('/api/employees/sum-values');
     const data = await response.json();
@@ -237,6 +251,7 @@ function App() {
     setSumMessage(data.message)
   }
 
+  // To handle sorting logic when a column header is clicked.
   function handleSort(field: 'name' | 'value') {
     if (sortField === field) {
       setSortOrder((prev) => (prev === 'asc' ? 'desc' : 'asc'));
@@ -246,6 +261,7 @@ function App() {
     }
   }
 
+  // To return the appropriate sort icon for a column.
   function getSortIcon(field: 'name' | 'value') {
     if (sortField !== field) return '🔼🔽'; 
     return sortOrder === 'asc' ? '🔼' : '🔽';

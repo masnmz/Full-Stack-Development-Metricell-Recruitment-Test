@@ -1,2 +1,4 @@
-﻿/.vs
+/.vs
 /.vscode
+node_modules/
+.DS_Store

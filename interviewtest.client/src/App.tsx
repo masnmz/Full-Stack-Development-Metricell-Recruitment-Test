@@ -247,7 +247,7 @@ function App() {
   }
 
   function getSortIcon(field: 'name' | 'value') {
-    if (sortField !== field) return '🔼🔽'; // sıralama aktif değilse çift ok göster
+    if (sortField !== field) return '🔼🔽'; 
     return sortOrder === 'asc' ? '🔼' : '🔽';
   }
   

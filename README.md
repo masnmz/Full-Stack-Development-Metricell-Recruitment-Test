@@ -14,4 +14,15 @@ The base project is using the most recent version of visual studio community wit
 
 - SQLite - database 
 - ASP.NET - backend 
-- React – frontend 
+- React – frontend
+
+- ## Screen Recording of the Completed Task
+-Updating,Deleting, Sorting
+
+https://github.com/user-attachments/assets/5c19839f-e91a-40bb-9ca1-42197b91bd72
+
+
+- Adding New Employee, Increasing Values and Sum Operation
+
+https://github.com/user-attachments/assets/b1360426-04f8-4a05-9fac-92dbd049c3fc
+

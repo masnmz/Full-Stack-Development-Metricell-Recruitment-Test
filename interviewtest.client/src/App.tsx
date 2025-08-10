@@ -33,152 +33,190 @@ function App() {
 
   return (
     <div style={{ padding: '2rem' }}>
+      {/* PAGE TITLE STARTS */}
       <h2>📋 Employees ({employees.length})</h2>
+      {/* PAGE TITLE ENDS */}
+
+      {/* EMPLOYEE LIST (TABLE) STARTS */}
       <table style={{ borderCollapse: 'collapse', width: '100%' }}>
-      
-  <thead>
-    <tr>
-    <th style={{
-      textAlign: 'left' as const,
-      padding: '8px',
-      border: '1px solid #ccc',
-      cursor: 'pointer',
-      userSelect: 'none',
-    }}
-     onClick={() => handleSort('name')}
-     >
-      Name {getSortIcon('name')}
-    </th>
-    <th style={{
-      textAlign: 'left' as const,
-      padding: '8px',
-      border: '1px solid #ccc',
-      cursor: 'pointer',
-      userSelect: 'none',
-    }} 
-    onClick={() => handleSort('value')}
-    >
-     Value {getSortIcon('value')}
-      </th>
-      <th style={{
-        textAlign: 'left' as const,
-        padding: '8px',
-        border: '1px solid #ccc',
-        cursor: 'pointer',
-        userSelect: 'none',
-      }}
-      >
-        Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    {sortedEmployees.map((e) => (
-      <tr key={e.name}>
-        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{e.name}</td>
-        <td style={{ padding: '8px', border: '1px solid #ccc' }}>{e.value}</td>
-        <td style={{ padding: '8px', border: '1px solid #ccc' }}>
-          <button
-            style={{
-              backgroundColor: '#F44336',
-              color: 'white',
-              padding: '4px 8px',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-              marginRight: '6px',
-            }}
-            onClick={() => deleteEmployee(e.name)}
+        
+      {/* TABLE HEADER STARTS */}    
+      <thead>
+        <tr>
+        <th style={{
+          textAlign: 'left' as const,
+          padding: '8px',
+          border: '1px solid #ccc',
+          cursor: 'pointer',
+          userSelect: 'none',
+        }}
+        onClick={() => handleSort('name')}
+        >
+          Name {getSortIcon('name')}
+        </th>
+        <th style={{
+          textAlign: 'left' as const,
+          padding: '8px',
+          border: '1px solid #ccc',
+          cursor: 'pointer',
+          userSelect: 'none',
+        }} 
+        onClick={() => handleSort('value')}
+        >
+        Value {getSortIcon('value')}
+          </th>
+          <th style={{
+            textAlign: 'left' as const,
+            padding: '8px',
+            border: '1px solid #ccc',
+            cursor: 'pointer',
+            userSelect: 'none',
+          }}
           >
-            Delete
-          </button>
+            Actions</th>
+        </tr>
+      </thead>
+      {/* TABLE HEADER ENDS */}
+
+      {/* TABLE BODY STARTS */}
+      <tbody>
+        {sortedEmployees.map((e) => (
+          // ROW STARTS
+          <tr key={e.name}>
+            <td style={{ padding: '8px', border: '1px solid #ccc' }}>{e.name}</td>
+            <td style={{ padding: '8px', border: '1px solid #ccc' }}>{e.value}</td>
+            <td style={{ padding: '8px', border: '1px solid #ccc' }}>
+
+              {/* DELETE BUTTON START */}
+              <button
+                style={{
+                  backgroundColor: '#F44336',
+                  color: 'white',
+                  padding: '4px 8px',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                  marginRight: '6px',
+                }}
+                onClick={() => deleteEmployee(e.name)}
+              >
+                Delete
+              </button>
+              {/* DELETE BUTTON ENDS */}
+
+              {/* UPDATE BUTTON STARTS */}
+              <button
+                style={{
+                  backgroundColor: '#42A5F5',
+                  color: 'white',
+                  padding: '4px 8px',
+                  border: 'none',
+                  borderRadius: '4px',
+                  cursor: 'pointer',
+                }}
+                onClick={() => updateEmployee(e)}
+              >
+                Update
+              </button>
+              {/* UPDATE BUTTON ENDS */}
+            </td>
+          </tr>
+          // ROW ENDS
+        ))}
+      </tbody>
+      {/* TABLE BODY ENDS */}
+    </table>
+    {/* EMPLOYEE LIST (TABLE) ENDS */}
+        
+
+          <hr />
+          {/* ADD EMPLOYEE FORM STARTS */}
+          <h3>➕ Add New Employee</h3>
+           {/* NAME INPUT STARTS */}
+          <input
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+           {/* NAME INPUT ENDS */}
+
+          {/* VALUE INPUT STARTS */}
+          <input
+            type="text"
+            inputMode="numeric"
+            pattern="[0-9]*"
+            placeholder="Enter the Value"
+            value={value}
+            onChange={(e) => setValue(e.target.value)}
+          />
+          {/* VALUE INPUT END */}
+
+          {/* ADD BUTTON STARTS */}
           <button
-            style={{
-              backgroundColor: '#42A5F5',
-              color: 'white',
-              padding: '4px 8px',
-              border: 'none',
-              borderRadius: '4px',
-              cursor: 'pointer',
-            }}
-            onClick={() => updateEmployee(e)}
-          >
-            Update
+          style={{
+            backgroundColor: '#42A5F5',
+            color: 'white',
+            padding: '1px 2px',
+            border: 'none',
+            borderRadius: '2px', 
+            cursor: 'pointer',
+            marginLeft: '6px', 
+          }}
+          
+          onClick={addEmployee}>Add
           </button>
-        </td>
-      </tr>
-    ))}
-  </tbody>
-</table>
-     
+          {/* ADD BUTTON ENDS */}
+          {/* ADD EMPLOYEE FORM ENDS */} 
 
-      <hr />
+          <hr />
+           {/* SPECIAL OPERATIONS STARTS */}
+          <h3>🤩 Special Operations</h3>
 
-      <h3>➕ Add New Employee</h3>
-      <input
-        placeholder="Name"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
-      />
+          {/* INCREASE VALUES BUTTON STARTS */}
+          <button 
+          style={{ 
+            backgroundColor: '#D4E157',
+            color: 'white',
+            padding: '1px 2px',
+            border: 'none',
+            borderRadius: '2px', 
+            cursor: 'pointer',
+          }} 
+          onClick={incrementValues}>Increase Values
+          </button>
+          {/* INCREASE VALUES BUTTON ENDS */}
 
-      <input
-        type="text"
-        inputMode="numeric"
-        pattern="[0-9]*"
-        placeholder="Enter the Value"
-        value={value}
-        onChange={(e) => setValue(e.target.value)}
-      />
-      <button
-      style={{
-        backgroundColor: '#42A5F5',
-        color: 'white',
-        padding: '1px 2px',
-        border: 'none',
-        borderRadius: '2px', 
-        cursor: 'pointer',
-        marginLeft: '6px', 
-      }}
-      
-      onClick={addEmployee}>Add
-      </button>
+           {/* SUM BUTTON STARTS */}
+          <button 
+          style={{ 
+            backgroundColor: '#FFA000',
+            color: 'white',
+            padding: '1px 2px',
+            border: 'none',
+            borderRadius: '2px', 
+            cursor: 'pointer',
+            marginLeft: '6px', 
+          }} 
+          
+          onClick={getSumValues}>Show A or B or C Sum 
+          </button>
+          {/* SUM BUTTON ENDS */}
+          {/* SPECIAL OPERATIONS ENDS */}
 
-      <hr />
 
-      <h3>🤩 Special Operations</h3>
-      <button 
-      style={{ 
-        backgroundColor: '#D4E157',
-        color: 'white',
-        padding: '1px 2px',
-        border: 'none',
-        borderRadius: '2px', 
-        cursor: 'pointer',
-      }} 
-      onClick={incrementValues}>Increase Values</button>
-      <button 
-      style={{ 
-        backgroundColor: '#FFA000',
-        color: 'white',
-        padding: '1px 2px',
-        border: 'none',
-        borderRadius: '2px', 
-        cursor: 'pointer',
-        marginLeft: '6px', 
-      }} 
-      
-      onClick={getSumValues}>Show A or B or C Sum </button>
-
-      {sumValue !== null && (
-        <p style={{ color: sumValue === 0 ? 'red' : 'black' }}>
-        {sumMessage && sumValue === 0 ? (
-          <strong>{sumMessage}</strong>
-        ) : (
-          <>The Sum of the Values of the Names Starts with A or B or C: <strong>{sumValue}</strong></>
-        )}
-      </p>
-      )}
-    </div>
-  );
+          {/* SUM RESULT STARTS */}
+          {sumValue !== null && (
+            <p style={{ color: sumValue === 0 ? 'red' : 'black' }}>
+            {sumMessage && sumValue === 0 ? (
+              <strong>{sumMessage}</strong>
+            ) : (
+              <>The Sum of the Values of the Names Starts with A or B or C: <strong>{sumValue}</strong></>
+            )}
+          </p>
+          )}
+          {/* SUM RESULT ENDS */}
+        </div>
+      );
 
    // FUNCTIONS
 

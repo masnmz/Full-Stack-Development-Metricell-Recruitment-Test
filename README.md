@@ -16,7 +16,8 @@ The base project is using the most recent version of visual studio community wit
 - ASP.NET - backend 
 - React – frontend
 
-- ## Screen Recording of the Completed Task
+#
+# Screen Recording of the Completed Task
 -Updating,Deleting, Sorting
 
 https://github.com/user-attachments/assets/5c19839f-e91a-40bb-9ca1-42197b91bd72
